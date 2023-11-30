@@ -1,0 +1,51 @@
+name: tuxocide
+base: core22
+version: '1.0'
+license: GPL-2.0-only
+summary: A fun coin pusher game featuring Tux!
+description: |
+  A war rages on in antarctica between penguins and hostile aliens...
+
+  Mouse locks when you click on the window, press ESCAPE to unlock the mouse.
+
+  W,A,S,D / Arrow Keys = Move
+  L-SHIFT / R-CTRL = Sprint
+  Left Click = Shoot
+  Right Click = Iron Sights
+  F = FPS to console
+  N = New Game and Seed
+
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: [amd64]
+    build-for: [amd64]
+  - build-on: [arm64]
+    build-for: [arm64]
+  - build-on: [armhf]
+    build-for: [armhf]
+
+apps:
+  tuxocide:
+    extensions: [gnome]
+    command: tuxocide
+    plugs:
+    - desktop
+    - desktop-legacy
+    - gsettings
+    - opengl
+    - wayland
+    - x11
+
+parts:
+  tuxocide:
+    source: https://github.com/mrbid/tuxocide
+    source-type: git
+    plugin: make
+    source-subdir: snap
+    build-packages:
+    - libglfw3-dev
+    stage-packages:
+    - libglfw3
+    - libgles2

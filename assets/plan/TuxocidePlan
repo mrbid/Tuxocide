@@ -1,0 +1,63 @@
+
+Tuxocide
+
+3D FPS a war rages on in antarctica...
+
+tuxes are being skinned for their pelt by an invasive alien species
+
+tux throws snowballs that just slow down the aliens temporarily
+
+alien throws orb (plasma proximity bomb) that has a large invisible radius that when collides
+with a tux(s) it expands to its invisible radius like an explosion converting all colliding
+tux(s) to pelts, an alien then has to collect the pelt and carry it back to their border
+until a ufo collects it from them. (collides with all objects, aliens can accidentally kill each other)
+
+it's up to you to stop the aliens, when you shoot one they flatten and widen animation using scale.
+
+when you kill one they scale inwards to a rod shape, then elongate upwards, the bottom then compresses to the top
+and they then vanish, like a sci-fi teleportation animation.
+
+your gun (AK-47) shoots actual projectiles with velocity
+
+aliens take three shots to die ~?
+
+aliens materialise from the bottom of the ufo beam (opacity in)
+
+tux appear from wells, the iceholes (opacity in) and then tux moves up into the game from under it.
+
+the ufo drops on one half (~the hilly?) and tuxs appear on the other half (the flat)
+have a small no mans land zone inbetween
+
+tree's are scattered at random using a fixed seed unless a game reset is triggered then random seed
+
+when tux dead pelt will rotate on the spot of death, can only be collected by aliens
+
+Aliens and Tux just spawn non-stop, maybe have the rate progress faster and faster over time
+score how many tux skinned vs how many aliens killed
+? maybe have a alien / own pelt collected stat, and allow player to collect pelts
+
+gun firing recoil animation (distance from camera)
+
+you can kill tux if you want (one hit kill)
+you are the only tux with a gun, you are rambo tux
+
+shooting pelt makes it spin faster briefly
+shooting floor makes splash
+shooting tree destroys bullet
+shooting snowball destroys snowball
+shooting plasma bomb does nothing (destroy bullet)
+
+aliens have to take pelts back to the ufo, in which the pelt will opacity out under the ufo beam as it dematerialises.
+
+the single ufo is quite busy having to collect pelts and place new aliens on its side of the map
+
+
+
+
+
+
+
+
+
+
+
