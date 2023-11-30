@@ -1,5 +1,7 @@
 **Play Online:** https://mrbid.github.io/tuxocide
 
+**Snapcraft:** https://snapcraft.io/tuxocide
+
 **Latest upto date repository at:** https://notabug.org/Vandarin/Tuxocide
 
 *This repository was only created for the Snapcraft submission.*
