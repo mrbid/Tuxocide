@@ -1,3 +1,5 @@
+![Screenshot of the Tuxocide game](https://raw.githubusercontent.com/mrbid/Tuxocide/main/screenshot.png)
+
 **Play Online:** https://mrbid.github.io/tuxocide
 
 **Snapcraft:** https://snapcraft.io/tuxocide
