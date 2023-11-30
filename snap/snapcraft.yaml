@@ -2,7 +2,7 @@ name: tuxocide
 base: core22
 version: '1.0'
 license: GPL-2.0-only
-summary: A fun coin pusher game featuring Tux!
+summary: 3D FPS a war rages on in antarctica...
 description: |
   A war rages on in antarctica between penguins and hostile aliens...
 
