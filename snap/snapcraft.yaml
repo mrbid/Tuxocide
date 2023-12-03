@@ -1,6 +1,6 @@
 name: tuxocide
 base: core22
-version: '1.0'
+version: '1.01'
 license: GPL-2.0-only
 summary: 3D FPS a war rages on in antarctica...
 description: |
