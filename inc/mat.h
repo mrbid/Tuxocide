@@ -578,13 +578,13 @@ void mSetDir(mat *r, const vec dir_norm, const vec up_norm)
     r->m[0][1] = c.y;
     r->m[0][2] = c.z;
 
-    r->m[1][0] = rup.x;
-    r->m[1][1] = rup.y;
-    r->m[1][2] = rup.z;
+    r->m[2][0] = rup.x;
+    r->m[2][1] = rup.y;
+    r->m[2][2] = rup.z;
 
-    r->m[2][0] = dir_norm.x;
-    r->m[2][1] = dir_norm.y;
-    r->m[2][2] = dir_norm.z;
+    r->m[1][0] = -dir_norm.x;
+    r->m[1][1] = -dir_norm.y;
+    r->m[1][2] = -dir_norm.z;
 }
 
 void mGetDirX(vec *r, const mat matrix)
