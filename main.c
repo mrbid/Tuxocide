@@ -33,7 +33,6 @@
 #include "assets/ak47.h"
 #include "assets/alien.h"
 #include "assets/alien_pelt.h"
-// #include "assets/ball.h"
 #include "assets/beam.h"
 #include "assets/bullet.h"
 #include "assets/icehole.h"
@@ -70,7 +69,6 @@ ESModel mdlIntro;
 ESModel mdlAK47;
 ESModel mdlAlien;
 ESModel mdlAlienPelt;
-// ESModel mdlBall;
 ESModel mdlBeam;
 ESModel mdlBullet;
 ESModel mdlIcehole;
@@ -81,7 +79,7 @@ ESModel mdlTux;
 ESModel mdlUFO;
 
 // game vars
-#define FAR_DISTANCE 16.f
+#define FAR_DISTANCE 32.f
 #define NEWGAME_SEED 1337
 char tts[32];
 uint keystate[5] = {0};
@@ -91,7 +89,6 @@ int TREE_SEED = 1337;
 uint focus_cursor = 0;
 double sens = 0.003f;
 float xrot = 0.f;
-float yrot = 1.5f;
 vec look_dir, lookx, looky;
 
 // player vars
@@ -123,6 +120,7 @@ uint alien_pelted[MAX_ALIEN];
 // ufo
 vec ufo_pos;
 vec ufo_spawnpos;
+uint ufo_above_pelted_alien = 0;
 
 // stats
 uint tuxkilled = 0;
@@ -215,7 +213,6 @@ void newGame(unsigned int seed)
 
     pp = (vec){0.f, 0.f, 0.f};
     xrot = 0.f;
-    //yrot = 1.5f;
     ufo_pos = (vec){0.f, 6.f, 0.3f};
     ufo_spawnpos = ufo_pos;
 
@@ -347,6 +344,7 @@ void main_loop()
     // alien spawner
     if(ufo_pos.x == ufo_spawnpos.x && ufo_pos.y == ufo_spawnpos.y)
     {
+        ufo_above_pelted_alien = 0;
         uint fail = 1;
         int pa = -1;
         for(int i = 0; i < MAX_ALIEN; i++)
@@ -379,8 +377,8 @@ void main_loop()
     }
 
     // move ufo
-    float uxi = ufo_spawnpos.x - ufo_pos.x;
-    float uyi = ufo_spawnpos.y - ufo_pos.y;
+    const float uxi = ufo_spawnpos.x - ufo_pos.x;
+    const float uyi = ufo_spawnpos.y - ufo_pos.y;
     if(fabsf(uxi) < 0.01f){ufo_pos.x = ufo_spawnpos.x;}
     if(fabsf(uyi) < 0.01f){ufo_pos.y = ufo_spawnpos.y;}
     ufo_pos.x += uxi*0.01f;
@@ -392,24 +390,11 @@ void main_loop()
     if(focus_cursor == 1)
     {
         glfwGetCursorPos(window, &mx, &my);
-
         xrot += (lx-mx)*sens;
-        // yrot += (ly-my)*sens;
-
-        // if(yrot > 1.6f)
-        //     yrot = 1.6f;
-        // if(yrot < 1.4f)
-        //     yrot = 1.4f;
-
-        // if(yrot > 2.5f)
-        //     yrot = 2.5f;
-        // if(yrot < 0.55f)
-        //     yrot = 0.55f;
-
-        lx = mx, ly = my;
+        lx = mx;
     }
     mIdent(&view);
-    mRotate(&view, yrot, 1.f, 0.f, 0.f);
+    mRotate(&view, 1.5f, 1.f, 0.f, 0.f); // technically its d2PI not 1.5 but whatever
     mRotate(&view, xrot, 0.f, 0.f, 1.f);
     mTranslate(&view, pp.x, pp.y, pp.z);
 
@@ -428,16 +413,8 @@ void main_loop()
     ///
 
     // shader program change
-    // shadeLambert(&position_id, &projection_id, &modelview_id, &lightpos_id, &color_id, &opacity_id);
-    // glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-    // glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
-    // glUniform3f(color_id, 0.722f, 0.525f, 0.333f);
-    // glUniform1f(opacity_id, 1.f);
-
-    // shader program change
     shadeFullbright(&position_id, &projection_id, &modelview_id, &color_id, &opacity_id);
     glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-    //glUniform1f(opacity_id, 1.f);
 
     // render terrain
     glUniformMatrix4fv(modelview_id, 1, GL_FALSE, (float*)&view.m[0][0]);
@@ -451,7 +428,6 @@ void main_loop()
     shadeLambert1(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
     glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
     glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
-    //glUniform1f(opacity_id, 1.f);
 
     // render bullet
     glUniform3f(color_id, 0.722f, 0.525f, 0.333f);
@@ -466,8 +442,30 @@ void main_loop()
             if(vMag(bullet_pos[i]) > 333.f){bullet_pos[i].z = -3.f; continue;} // bullet left game bounds
 
             mIdent(&model);
-            mSetDir(&model, bullet_dir[i], (vec){0.f, 0.f, 1.f});
-            mRotY(&model, -90.f*DEG2RAD);
+            
+            ///
+            const vec up_norm = (vec){0.f, 0.f, 1.f};
+
+            vec c;
+            vCross(&c, up_norm, bullet_dir[i]);
+            vNorm(&c);
+
+            vec rup;
+            vCross(&rup, bullet_dir[i], c);
+
+            model.m[0][0] = -c.x;
+            model.m[0][1] = -c.y;
+            model.m[0][2] = -c.z;
+
+            model.m[2][0] = rup.x;
+            model.m[2][1] = rup.y;
+            model.m[2][2] = rup.z;
+
+            model.m[1][0] = bullet_dir[i].x;
+            model.m[1][1] = bullet_dir[i].y;
+            model.m[1][2] = bullet_dir[i].z;
+            ///
+
             mSetPos(&model, bullet_pos[i]);
             mMul(&modelview, &model, &view);
             glUniformMatrix4fv(modelview_id, 1, GL_FALSE, (float*)&modelview.m[0][0]);
@@ -482,7 +480,6 @@ void main_loop()
     shadeLambert3(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
     glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
     glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
-    //glUniform1f(opacity_id, 1.f);
 
     // render ufo
     mIdent(&model);
@@ -555,6 +552,7 @@ void main_loop()
                 const float ym = (alien_pos[i].y - ufo_pos.y);
                 if(xm*xm + ym*ym < 0.06f)
                 {
+                    ufo_above_pelted_alien = 1;
                     alien_pelted[i] = 0;
                     alienpelts++;
                     updateTitle();
@@ -612,7 +610,6 @@ void main_loop()
             vMulS(&inc, dir_norm, ALIEN_SPEED * dt);
             vAdd(&alien_pos[i], alien_pos[i], inc);
 
-            mRotY(&model, 90.f*DEG2RAD);
             mMul(&modelview, &model, &view);
             glUniformMatrix4fv(modelview_id, 1, GL_FALSE, (float*)&modelview.m[0][0]);
             modelBind3(&mdlAlien);
@@ -753,7 +750,7 @@ void main_loop()
     ///
     
     // render beam
-    if(fabsf(uxi) < 0.1f && fabsf(uyi) < 0.1f)
+    if((fabsf(uxi) < 0.1f && fabsf(uyi) < 0.1f) || ufo_above_pelted_alien != 0)
     {
         // shader program change
         shadeLambert1(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
@@ -773,7 +770,6 @@ void main_loop()
         shadeLambert3(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
         glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
         glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
-
     }
 
     ///
@@ -803,7 +799,6 @@ void main_loop()
     if(akxo == 0.f)
     {
         vMulS(&vy, vy, 0.0088f);
-        //vMulS(&vy, vy, 0.014f);
     }
     else
     {
@@ -1121,10 +1116,6 @@ int main(int argc, char** argv)
     esBind(GL_ARRAY_BUFFER, &mdlTerrain.vid, terrain_vertices, sizeof(terrain_vertices), GL_STATIC_DRAW);
     esBind(GL_ELEMENT_ARRAY_BUFFER, &mdlTerrain.iid, terrain_indices, sizeof(terrain_indices), GL_STATIC_DRAW);
 
-    // ***** BIND BALL *****
-    // esBind(GL_ARRAY_BUFFER, &mdlBall.vid, ball_vertices, sizeof(ball_vertices), GL_STATIC_DRAW);
-    // esBind(GL_ELEMENT_ARRAY_BUFFER, &mdlBall.iid, ball_indices, sizeof(ball_indices), GL_STATIC_DRAW);
-
     // ***** BIND BULLET *****
     esBind(GL_ARRAY_BUFFER, &mdlBullet.vid, bullet_vertices, sizeof(bullet_vertices), GL_STATIC_DRAW);
     esBind(GL_ARRAY_BUFFER, &mdlBullet.nid, bullet_normals, sizeof(bullet_normals), GL_STATIC_DRAW);
@@ -1187,7 +1178,6 @@ int main(int argc, char** argv)
 // compile & link shader programs
 //*************************************
     makeFullbright();
-    // makeLambert();
     makeLambert1();
     makeLambert3();
 
