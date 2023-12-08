@@ -4,6 +4,8 @@
 
 **Snapcraft:** https://snapcraft.io/tuxocide
 
+**Flathub:** https://flathub.org/apps/com.voxdsp.Tuxocide
+
 **Latest upto date repository at:** https://notabug.org/Vandarin/Tuxocide
 
 *This repository was only created for the Snapcraft submission.*
