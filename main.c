@@ -849,10 +849,6 @@ void main_loop()
             vec np = (vec){-pp.x, -pp.y, -pp.z};
             vAdd(&np, np, ld);
 
-            vec vy = looky;
-            vMulS(&vy, vy, 0.0f);
-            vAdd(&np, np, vy);
-
             mIdent(&model);
             mSetPos(&model, np);
             mRotZ(&model, -xrot);
