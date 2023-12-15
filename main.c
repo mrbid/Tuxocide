@@ -62,7 +62,6 @@ GLint opacity_id;
 
 // render state
 mat projection, view, model, modelview;
-vec lightpos = {0.f, 0.f, 0.f};
 
 // models
 ESModel mdlIntro;
@@ -427,7 +426,6 @@ void main_loop()
     // shader program change
     shadeLambert1(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
     glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-    glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
 
     // render bullet
     glUniform3f(color_id, 0.722f, 0.525f, 0.333f);
@@ -479,7 +477,6 @@ void main_loop()
     // shader program change
     shadeLambert3(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
     glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-    glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
 
     // render ufo
     mIdent(&model);
@@ -755,7 +752,6 @@ void main_loop()
         // shader program change
         shadeLambert1(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
         glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-        glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
         glUniform3f(color_id, 0.00784f, 1.f, 0.f);
         glUniform1f(opacity_id, 0.5f);
         mIdent(&model);
@@ -769,7 +765,6 @@ void main_loop()
         // shader program change
         shadeLambert3(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
         glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-        glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
     }
 
     ///
@@ -968,7 +963,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
                 }
             }
         }
-        if(button == GLFW_MOUSE_BUTTON_RIGHT)
+        else if(button == GLFW_MOUSE_BUTTON_RIGHT)
         {
             akxo = 0.f;
         }
@@ -1188,7 +1183,6 @@ int main(int argc, char** argv)
 
     shadeLambert3(&position_id, &projection_id, &modelview_id, &lightpos_id, &normal_id, &color_id, &opacity_id);
     glUniformMatrix4fv(projection_id, 1, GL_FALSE, (float*)&projection.m[0][0]);
-    glUniform3f(lightpos_id, lightpos.x, lightpos.y, lightpos.z);
     window_size_callback(window, winw, winh);
 
 //*************************************
