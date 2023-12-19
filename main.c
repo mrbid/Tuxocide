@@ -48,7 +48,7 @@
 const char appTitle[]="Tuxocide";
 GLFWwindow* window;
 uint winw=1024, winh=768;
-float t=0.f, dt=0.f, st=0.f, fc=0.f, lfct=0.f, aspect;
+float t=0.f, dt=0.f, lt=0.f, st=0.f, fc=0.f, lfct=0.f, aspect;
 double mx,my,lx,ly,ww,wh;
 
 // render state id's
@@ -214,6 +214,10 @@ void newGame(unsigned int seed)
     xrot = 0.f;
     ufo_pos = (vec){0.f, 6.f, 0.3f};
     ufo_spawnpos = ufo_pos;
+    tux_nextspawn = 0.f;
+    akdist = 0.17f;
+    akreset = 0.f;
+    lt = 0.f;
 
     for(int i = 0; i < MAX_BULLETS; i++){bullet_pos[i].z = -3.f;}
     for(int i = 0; i < MAX_TUX; i++){tux_pos[i].z = -3.f;}
@@ -251,7 +255,6 @@ void main_loop()
 //*************************************
     fc++;
     glfwPollEvents();
-    static float lt = 0;
     t = (float)glfwGetTime();
     dt = t-lt;
     lt = t;
