@@ -1,4 +1,4 @@
-![Screenshot of the Tuxocide game](https://raw.githubusercontent.com/mrbid/Tuxocide/main/screenshot.png)
+[![Screenshot of the Tuxocide game](https://raw.githubusercontent.com/mrbid/Tuxocide/main/screenshot.png)](https://www.youtube.com/watch?v=ZBeDcu7AnJY)
 
 **Play Online:** https://mrbid.github.io/tuxocide
 
