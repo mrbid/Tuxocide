@@ -12,7 +12,7 @@
 
 ## attribution
 * [Alien](https://lospec.com/gallery/cyon4d/psychicer-alien-lowpolyworkshop-challenge-entry) made by [Cuneyt Yetisenler](https://pixeljoint.com/p/29255.htm?sec=icons&pg=1)
-* Tux made by [Andy Cuccaro](https://sketchfab.com/3d-models/tux-157de95fa4014050a969a8361a83d366)
+* [Tux](https://sketchfab.com/3d-models/tux-157de95fa4014050a969a8361a83d366) made by [Andy Cuccaro](https://andycuccaro.gumroad.com/)
 * Christmas Tree made by [yaner24](https://downloadfree3d.com/3d-printing-models/art/little-christmas-tree/)
 * UFO made by [Manuel Wins](https://downloadfree3d.com/3d-models/aircraft/spaceship/bob-lazar-ufo/) based on descriptions by Bob Lazar.
 * AK-47 made by [AdityaAmbatkar](https://downloadfree3d.com/3d-models/weapons/rifle/ak-47-6/)
