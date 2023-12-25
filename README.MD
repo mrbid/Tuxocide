@@ -1,14 +1,9 @@
 [![Screenshot of the Tuxocide game](https://raw.githubusercontent.com/mrbid/Tuxocide/main/screenshot.png)](https://www.youtube.com/watch?v=ZBeDcu7AnJY)
 
-**Play Online:** https://mrbid.github.io/tuxocide
-
-**Snapcraft:** https://snapcraft.io/tuxocide
-
-**Flathub:** https://flathub.org/apps/com.voxdsp.Tuxocide
-
-**Latest upto date repository at:** https://notabug.org/Vandarin/Tuxocide
-
-*This repository was only created for the Snapcraft submission.*
+* **Play Online:** https://mrbid.github.io/tuxocide
+* **Flathub:** https://flathub.org/apps/com.voxdsp.Tuxocide
+* **Snapcraft:** https://snapcraft.io/tuxocide
+* **Windows:** [Tuxocide_win.zip](https://github.com/mrbid/Tuxocide/releases/download/windows/Tuxocide_win.zip)
 
 ## attribution
 * [Alien](https://lospec.com/gallery/cyon4d/psychicer-alien-lowpolyworkshop-challenge-entry) made by [Cuneyt Yetisenler](https://pixeljoint.com/p/29255.htm?sec=icons&pg=1)
