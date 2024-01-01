@@ -9,7 +9,7 @@
 * [Alien](https://lospec.com/gallery/cyon4d/psychicer-alien-lowpolyworkshop-challenge-entry) made by [Cuneyt Yetisenler](https://pixeljoint.com/p/29255.htm?sec=icons&pg=1)
 * [Tux](https://sketchfab.com/3d-models/tux-157de95fa4014050a969a8361a83d366) made by [Andy Cuccaro](https://andycuccaro.gumroad.com/)
 * Christmas Tree made by [yaner24](https://downloadfree3d.com/3d-printing-models/art/little-christmas-tree/)
-* UFO made by [Manuel Wins](https://downloadfree3d.com/3d-models/aircraft/spaceship/bob-lazar-ufo/) based on descriptions by Bob Lazar.
+* UFO made by [Manuel Wins](https://downloadfree3d.com/3d-models/aircraft/spaceship/bob-lazar-ufo/) based on descriptions by [Bob Lazar](https://en.wikipedia.org/wiki/Bob_Lazar).
 * AK-47 made by [AdityaAmbatkar](https://downloadfree3d.com/3d-models/weapons/rifle/ak-47-6/)
 * [RamboTux](https://3.bp.blogspot.com/_OTIWl8p4ISc/SgxWz8Ixa5I/AAAAAAAABnM/hSxs5hdrya8/s1600-h/santang-rambo-tux.png) image by [Santang](https://web.archive.org/web/20151002050322/http://www.crystalxp.net/forum/en/profil-27983.htm)
 * Font is [Plastic Love](https://www.fontspace.com/plastic-love-font-f49676) by [Azkarizki](https://www.fontspace.com/azkarizki)
